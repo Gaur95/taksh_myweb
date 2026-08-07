@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akash Gaur — DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0F17;
+    --panel:#121926;
+    --panel-2:#0F1520;
+    --border:#212B3B;
+    --text:#E7ECF3;
+    --muted:#8896AA;
+    --dim:#5B6478;
+    --green:#34D399;
+    --amber:#FBBF24;
+    --blue:#60A5FA;
+    --red:#F87171;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+    --font-body:'Inter', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(96,165,250,0.06), transparent 45%),
+      radial-gradient(circle at 85% 10%, rgba(52,211,153,0.05), transparent 40%);
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--green);color:#04150E;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- status bar ---------- */
+  .statusbar{
+    border-bottom:1px solid var(--border);
+    background:rgba(11,15,23,0.85);
+    backdrop-filter:blur(8px);
+    position:sticky;top:0;z-index:50;
+  }
+  .statusbar-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;font-family:var(--font-mono);font-size:12px;color:var(--muted);
+    max-width:1100px;margin:0 auto;flex-wrap:wrap;gap:10px;
+  }
+  .statusbar-left{display:flex;align-items:center;gap:8px;}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2.2s infinite;flex-shrink:0;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+  .statusbar nav{display:flex;gap:22px;}
+  .statusbar nav a{color:var(--muted);transition:color .15s;}
+  .statusbar nav a:hover{color:var(--text);}
+  @media (max-width:640px){.statusbar nav{display:none;}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:72px 0 40px;}
+  .hero-grid{display:grid;grid-template-columns:1.3fr 0.9fr;gap:56px;align-items:center;}
+  @media (max-width:860px){.hero-grid{grid-template-columns:1fr;gap:40px;}}
+
+  .eyebrow{
+    font-family:var(--font-mono);font-size:12px;color:var(--green);
+    display:flex;align-items:center;gap:8px;margin-bottom:18px;letter-spacing:.04em;
+  }
+  .eyebrow::before{content:'$';color:var(--dim);}
+  h1{
+    font-family:var(--font-display);font-weight:700;
+    font-size:clamp(34px,5.4vw,56px);line-height:1.08;letter-spacing:-0.01em;
+    margin-bottom:14px;
+  }
+  h1 .accent{color:var(--green);}
+  .role-line{
+    font-family:var(--font-mono);font-size:16px;color:var(--muted);margin-bottom:24px;
+  }
+  .role-line .cursor{display:inline-block;width:8px;height:16px;background:var(--green);margin-left:2px;vertical-align:-2px;animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .hero-desc{color:var(--muted);font-size:16px;max-width:520px;margin-bottom:30px;}
+  .hero-desc strong{color:var(--text);font-weight:600;}
+
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px;}
+  .btn{
+    font-family:var(--font-mono);font-size:13px;padding:11px 20px;border-radius:6px;
+    border:1px solid var(--border);transition:all .15s;
+  }
+  .btn-primary{background:var(--green);color:#04150E;border-color:var(--green);font-weight:600;}
+  .btn-primary:hover{background:#2ac488;}
+  .btn-ghost{color:var(--text);}
+  .btn-ghost:hover{border-color:var(--muted);}
+
+  .meta-row{display:flex;gap:28px;flex-wrap:wrap;font-family:var(--font-mono);font-size:12px;color:var(--dim);}
+  .meta-row span b{color:var(--text);font-weight:600;}
+
+  /* profile card */
+  .profile-card{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:26px;position:relative;
+  }
+  .profile-card::before{
+    content:'PROFILE.EXE';position:absolute;top:-10px;left:20px;
+    background:var(--bg);padding:0 8px;font-family:var(--font-mono);font-size:10px;color:var(--dim);letter-spacing:.08em;
+  }
+  .avatar-ring{
+    width:132px;height:132px;border-radius:50%;margin:8px auto 18px;
+    padding:4px;background:conic-gradient(var(--green) 0deg 320deg, var(--border) 320deg 360deg);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .avatar-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;border:3px solid var(--bg);}
+  .profile-name{font-family:var(--font-display);text-align:center;font-size:19px;font-weight:600;}
+  .profile-role{font-family:var(--font-mono);text-align:center;font-size:12px;color:var(--green);margin-top:4px;margin-bottom:18px;}
+  .profile-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+  .stat{background:var(--panel-2);padding:12px 14px;}
+  .stat b{display:block;font-family:var(--font-display);font-size:20px;}
+  .stat span{font-family:var(--font-mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.04em;}
+
+  /* ---------- pipeline (signature element) ---------- */
+  .pipeline-section{padding:20px 0 60px;}
+  .pipeline-label{font-family:var(--font-mono);font-size:12px;color:var(--dim);margin-bottom:14px;display:flex;justify-content:space-between;}
+  .pipeline{
+    display:flex;align-items:center;background:var(--panel);border:1px solid var(--border);
+    border-radius:12px;padding:22px 26px;overflow-x:auto;gap:0;
+  }
+  .stage{display:flex;flex-direction:column;align-items:center;flex-shrink:0;min-width:110px;position:relative;}
+  .stage-node{
+    width:44px;height:44px;border-radius:50%;border:2px solid var(--border);
+    display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);
+    font-size:16px;color:var(--dim);background:var(--panel-2);transition:all .4s ease;
+  }
+  .stage-label{font-family:var(--font-mono);font-size:11px;color:var(--dim);margin-top:9px;transition:color .4s;text-align:center;}
+  .stage-sub{font-family:var(--font-mono);font-size:9px;color:var(--dim);opacity:0;transition:opacity .4s;margin-top:2px;}
+  .connector{flex:1;height:2px;background:var(--border);min-width:24px;position:relative;top:-14px;transition:background .5s;}
+  .stage.done .stage-node{border-color:var(--green);color:var(--green);background:rgba(52,211,153,0.08);}
+  .stage.done .stage-label{color:var(--text);}
+  .stage.done .stage-sub{opacity:1;color:var(--green);}
+  .connector.done{background:var(--green);}
+  .stage.active .stage-node{border-color:var(--amber);color:var(--amber);animation:spin-glow 1.2s infinite;}
+  .stage.active .stage-label{color:var(--text);}
+  @keyframes spin-glow{0%,100%{box-shadow:0 0 0 rgba(251,191,36,0);}50%{box-shadow:0 0 14px rgba(251,191,36,.5);}}
+
+  /* ---------- sections shared ---------- */
+  section{padding:64px 0;border-top:1px solid var(--border);}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:34px;flex-wrap:wrap;}
+  .sec-num{font-family:var(--font-mono);color:var(--dim);font-size:13px;}
+  .sec-title{font-family:var(--font-display);font-size:26px;font-weight:600;}
+  .sec-sub{font-family:var(--font-mono);font-size:12px;color:var(--dim);margin-left:auto;}
+
+  /* ---------- services (skills) ---------- */
+  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  @media (max-width:700px){.svc-grid{grid-template-columns:1fr;}}
+  .svc-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px 22px;}
+  .svc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .svc-title{font-family:var(--font-display);font-size:15px;font-weight:600;}
+  .svc-status{font-family:var(--font-mono);font-size:10px;color:var(--green);border:1px solid rgba(52,211,153,.3);background:rgba(52,211,153,.08);padding:3px 8px;border-radius:20px;}
+  .tag-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .tag{font-family:var(--font-mono);font-size:11px;color:var(--muted);border:1px solid var(--border);padding:5px 10px;border-radius:6px;}
+
+  /* ---------- deploy log (experience) ---------- */
+  .log{display:flex;flex-direction:column;}
+  .log-entry{display:grid;grid-template-columns:120px 20px 1fr;gap:0;padding-bottom:34px;position:relative;}
+  .log-entry:last-child{padding-bottom:0;}
+  .log-time{font-family:var(--font-mono);font-size:12px;color:var(--dim);padding-top:2px;}
+  .log-rail{display:flex;flex-direction:column;align-items:center;}
+  .log-node{width:10px;height:10px;border-radius:50%;background:var(--green);margin-top:5px;flex-shrink:0;box-shadow:0 0 0 4px rgba(52,211,153,.12);}
+  .log-line{flex:1;width:2px;background:var(--border);margin-top:4px;}
+  .log-body{padding-left:18px;padding-bottom:4px;}
+  .log-role{font-family:var(--font-display);font-size:17px;font-weight:600;}
+  .log-org{font-family:var(--font-mono);font-size:12px;color:var(--green);margin-top:2px;margin-bottom:10px;}
+  .log-desc{color:var(--muted);font-size:14px;max-width:600px;}
+  .log-desc ul{margin-top:8px;padding-left:18px;}
+  .log-desc li{margin-bottom:4px;}
+
+  /* ---------- certifications ---------- */
+  .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media (max-width:760px){.cert-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.cert-grid{grid-template-columns:1fr;}}
+  .cert-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;}
+  .cert-card.pending{opacity:.55;border-style:dashed;}
+  .cert-icon{font-family:var(--font-mono);font-size:11px;color:var(--green);border:1px solid var(--border);width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
+  .cert-name{font-family:var(--font-display);font-size:14px;font-weight:600;margin-bottom:4px;}
+  .cert-issuer{font-family:var(--font-mono);font-size:10px;color:var(--dim);}
+  .cert-flag{font-family:var(--font-mono);font-size:9px;text-transform:uppercase;letter-spacing:.05em;margin-top:10px;color:var(--green);}
+  .cert-card.pending .cert-flag{color:var(--amber);}
+
+  /* ---------- incidents / highlights ---------- */
+  .inc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media (max-width:820px){.inc-grid{grid-template-columns:1fr;}}
+  .inc-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px;}
+  .inc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-family:var(--font-mono);font-size:10px;}
+  .inc-sev{color:var(--red);}
+  .inc-resolved{color:var(--green);}
+  .inc-title{font-family:var(--font-display);font-weight:600;font-size:15px;margin-bottom:8px;}
+  .inc-desc{color:var(--muted);font-size:13px;}
+  .inc-impact{font-family:var(--font-mono);font-size:11px;color:var(--green);margin-top:12px;}
+
+  /* ---------- contact ---------- */
+  .contact-panel{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:36px;}
+  .term-line{font-family:var(--font-mono);font-size:13px;color:var(--muted);margin-bottom:8px;}
+  .term-line .prompt{color:var(--green);}
+  .term-line .cmd{color:var(--text);}
+  .contact-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px;}
+  .clink{font-family:var(--font-mono);font-size:13px;padding:12px 18px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;gap:8px;transition:all .15s;}
+  .clink:hover{border-color:var(--green);color:var(--green);}
+
+  footer{padding:30px 0;text-align:center;font-family:var(--font-mono);font-size:11px;color:var(--dim);border-top:1px solid var(--border);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="statusbar">
+    <div class="statusbar-inner">
+      <div class="statusbar-left"><span class="dot"></span> SYSTEM STATUS: OPERATIONAL — open to new opportunities</div>
+      <nav>
+        <a href="#services">services</a>
+        <a href="#deployments">deployments</a>
+        <a href="#certifications">certifications</a>
+        <a href="#incidents">highlights</a>
+        <a href="#contact">contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="hero" style="border-top:none;padding-top:72px;">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">whoami</div>
+          <h1>Akash Gaur<br>builds infrastructure <span class="accent">that doesn't page you at 3am.</span></h1>
+          <div class="role-line">devops-engineer --experience 5+yrs --location Noida,IN<span class="cursor"></span></div>
+          <p class="hero-desc">
+            <strong>DevOps Engineer</strong> at Appinventiv, focused on cloud infrastructure, CI/CD automation
+            and DevSecOps on AWS. AWS Certified DevOps Engineer – Professional, working daily across
+            Kubernetes, Terraform, ArgoCD and observability tooling to ship reliable, secure releases.
+          </p>
+          <div class="cta-row">
+            <a href="#contact" class="btn btn-primary">Get in touch</a>
+            <a href="#deployments" class="btn btn-ghost">View experience →</a>
+          </div>
+          <div class="meta-row">
+            <span><b>5+ yrs</b> in production</span>
+            <span><b>AWS DevOps</b> Pro certified</span>
+            <span><b>Noida / Jaipur</b> based</span>
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <div class="avatar-ring">
+            <img src="https://avatars.githubusercontent.com/u/104058163?v=4" alt="Akash Gaur profile photo">
+          </div>
+          <div class="profile-name">Akash Gaur</div>
+          <div class="profile-role">DevOps Engineer</div>
+          <div class="profile-stats">
+            <div class="stat"><b>5+</b><span>Years Exp</span></div>
+            <div class="stat"><b>AWS</b><span>Pro Certified</span></div>
+            <div class="stat"><b>99.9%</b><span>Target Uptime</span></div>
+            <div class="stat"><b>24/7</b><span>On-call Ready</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pipeline-section" style="border-top:none;">
+      <div class="pipeline-label">
+        <span>PIPELINE: portfolio-deploy</span>
+        <span id="pipeline-status">RUNNING…</span>
+      </div>
+      <div class="pipeline" id="pipeline">
+        <div class="stage" data-stage="0">
+          <div class="stage-node">01</div>
+          <div class="stage-label">Build</div>
+          <div class="stage-sub">Terraform + Docker</div>
+        </div>
+        <div class="connector" data-conn="0"></div>
+        <div class="stage" data-stage="1">
+          <div class="stage-node">02</div>
+          <div class="stage-label">Test</div>
+          <div class="stage-sub">CI validation</div>
+        </div>
+        <div class="connector" data-conn="1"></div>
+        <div class="stage" data-stage="2">
+          <div class="stage-node">03</div>
+          <div class="stage-label">Scan</div>
+          <div class="stage-sub">Trivy + SonarQube</div>
+        </div>
+        <div class="connector" data-conn="2"></div>
+        <div class="stage" data-stage="3">
+          <div class="stage-node">04</div>
+          <div class="stage-label">Deploy</div>
+          <div class="stage-sub">ArgoCD → EKS</div>
+        </div>
+        <div class="connector" data-conn="3"></div>
+        <div class="stage" data-stage="4">
+          <div class="stage-node">05</div>
+          <div class="stage-label">Monitor</div>
+          <div class="stage-sub">New Relic / OTel</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <h2 class="sec-title">Services running</h2>
+        <span class="sec-sub">core skill set</span>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-card">
+          <div class="svc-head"><span class="svc-title">Cloud &amp; Infrastructure</span><span class="svc-status">● live</span></div>
+          <div class="tag-row">
+            <span class="tag">AWS</span><span class="tag">EKS</span><span class="tag">Terraform</span>
+            <span class="tag">Multi-region DR</span><span class="tag">VPC / IAM</span>
+          </div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-head"><span class="svc-title">CI/CD &amp; GitOps</span><span class="svc-status">● live</span></div>
+          <div class="tag-row">
+            <span class="tag">ArgoCD</span><span class="tag">GitHub Actions</span><span class="tag">GitLab CI</span>
+            <span class="tag">Jenkins</span>
+          </div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-head"><span class="svc-title">DevSecOps</span><span class="svc-status">● live</span></div>
+          <div class="tag-row">
+            <span class="tag">Trivy</span><span class="tag">SonarQube</span><span class="tag">Approval workflows</span>
+            <span class="tag">Shift-left scanning</span>
+          </div>
+        </div>
+        <div class="svc-card">
+          <div class="svc-head"><span class="svc-title">Observability</span><span class="svc-status">● live</span></div>
+          <div class="tag-row">
+            <span class="tag">New Relic</span><span class="tag">OpenTelemetry</span><span class="tag">Kubernetes</span>
+            <span class="tag">Alerting / SLOs</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="deployments">
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <h2 class="sec-title">Deployment log</h2>
+        <span class="sec-sub">experience</span>
+      </div>
+      <div class="log">
+        <div class="log-entry">
+          <div class="log-time">May 2025 →<br>current</div>
+          <div class="log-rail"><div class="log-node"></div><div class="log-line"></div></div>
+          <div class="log-body">
+            <div class="log-role">DevOps Engineer</div>
+            <div class="log-org">Appinventiv Pvt. Ltd. — Noida</div>
+            <div class="log-desc">
+              Own CI/CD pipelines and cloud infrastructure across client projects on AWS.
+              <ul>
+                <li>Designed CI/CD pipeline flows with SonarQube + Trivy security scanning and merge-request approval gates</li>
+                <li>Working across EKS, Terraform and ArgoCD for GitOps-driven deployments</li>
+                <li>Building observability with New Relic and OpenTelemetry for production workloads</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="log-entry">
+          <div class="log-time">Earlier<br>roles</div>
+          <div class="log-rail"><div class="log-node" style="background:var(--dim);box-shadow:none;"></div></div>
+          <div class="log-body">
+            <div class="log-role">DevOps / Cloud Engineer</div>
+            <div class="log-org">— add previous company —</div>
+            <div class="log-desc">
+              Add your earlier roles here — company, dates and 2-3 achievement bullets, same format as above.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <div class="sec-head">
+        <span class="sec-num">03</span>
+        <h2 class="sec-title">Certifications</h2>
+        <span class="sec-sub">verified credentials</span>
+      </div>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-icon">✓</div>
+          <div class="cert-name">AWS DevOps Engineer</div>
+          <div class="cert-issuer">Professional · Amazon Web Services</div>
+          <div class="cert-flag">verified</div>
+        </div>
+        <div class="cert-card pending">
+          <div class="cert-icon">…</div>
+          <div class="cert-name">CKA</div>
+          <div class="cert-issuer">Certified Kubernetes Administrator</div>
+          <div class="cert-flag">in progress</div>
+        </div>
+        <div class="cert-card pending">
+          <div class="cert-icon">…</div>
+          <div class="cert-name">Terraform Associate</div>
+          <div class="cert-issuer">HashiCorp</div>
+          <div class="cert-flag">planned</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="incidents">
+      <div class="sec-head">
+        <span class="sec-num">04</span>
+        <h2 class="sec-title">Resolved incidents</h2>
+        <span class="sec-sub">selected work</span>
+      </div>
+      <div class="inc-grid">
+        <div class="inc-card">
+          <div class="inc-top"><span class="inc-sev">P2 · SECURITY</span><span class="inc-resolved">RESOLVED</span></div>
+          <div class="inc-title">Pipeline lacked security gates</div>
+          <div class="inc-desc">Designed and shipped a CI/CD flow with SonarQube + Trivy scanning and a GitLab MR approval workflow, documented in Mermaid and draw.io.</div>
+          <div class="inc-impact">→ shift-left scanning on every merge</div>
+        </div>
+        <div class="inc-card">
+          <div class="inc-top"><span class="inc-sev">P3 · TOOLING</span><span class="inc-resolved">IN PROGRESS</span></div>
+          <div class="inc-title">No internal CI/CD sandbox</div>
+          <div class="inc-desc">Building a Jenkins-like CI/CD tool from scratch (Python, FastAPI, PyYAML, Kubernetes client, asyncio) as a deep-dive into pipeline internals.</div>
+          <div class="inc-impact">→ hands-on orchestration learning</div>
+        </div>
+        <div class="inc-card">
+          <div class="inc-top"><span class="inc-sev">P3 · RELIABILITY</span><span class="inc-resolved">RESOLVED</span></div>
+          <div class="inc-title">Single-region failure risk</div>
+          <div class="inc-desc">Contributed to multi-region disaster recovery design on AWS to reduce blast radius of regional outages.</div>
+          <div class="inc-impact">→ improved recovery posture</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="sec-head">
+        <span class="sec-num">05</span>
+        <h2 class="sec-title">Contact</h2>
+        <span class="sec-sub">let's talk</span>
+      </div>
+      <div class="contact-panel">
+        <div class="term-line"><span class="prompt">akash@devops</span><span class="cmd">:~$ </span>cat intent.txt</div>
+        <div class="term-line" style="color:var(--text);margin-bottom:20px;">Open to DevOps / SRE / Cloud roles — reach out below.</div>
+        <div class="contact-links">
+          <a class="clink" href="mailto:[email protected]">✉ email — add address</a>
+          <a class="clink" href="#">🔗 LinkedIn — add link</a>
+          <a class="clink" href="#">💻 GitHub — add link</a>
+          <a class="clink" href="tel:+910000000000">📞 phone — add number</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>© 2026 Akash Gaur · built with intent, deployed with confidence</footer>
+
+<script>
+  // Pipeline animation: sequential stage completion
+  (function(){
+    const stages = document.querySelectorAll('.stage');
+    const conns = document.querySelectorAll('.connector');
+    const statusEl = document.getElementById('pipeline-status');
+    let i = 0;
+
+    function step(){
+      if(i > 0){ stages[i-1].classList.remove('active'); stages[i-1].classList.add('done'); }
+      if(i < stages.length){
+        stages[i].classList.add('active');
+        if(i > 0) conns[i-1].classList.add('done');
+        i++;
+        setTimeout(step, 650);
+      } else {
+        statusEl.textContent = 'DEPLOYED ✓';
+        statusEl.style.color = 'var(--green)';
+      }
+    }
+
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ step(); io.disconnect(); }
+      });
+    }, {threshold:0.4});
+    io.observe(document.getElementById('pipeline'));
+  })();
+</script>
+</body>
+</html>
